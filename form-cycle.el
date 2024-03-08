@@ -283,8 +283,9 @@
   (let ((count 0))
     (save-excursion
       (ignore-errors
-        (cl-loop (backward-sexp)
-                 (incf count))))
+        (cl-loop (print count)
+                 (backward-sexp)
+                 (cl-incf count))))
     (unless (funcall fn count n)
       (form-cycle-skip))
     form))
