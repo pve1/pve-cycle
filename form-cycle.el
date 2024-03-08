@@ -3,6 +3,7 @@
 (require 'cl-lib)
 (require 'ido)
 
+(defvar form-cycle-pattern-file nil)
 (defvar form-cycle-current-cycle-state nil)
 (defvar form-cycle-position nil)
 (defvar form-cycle-initial-position nil)
@@ -823,7 +824,10 @@
   (interactive)
   (let ((file (expand-file-name
                (read-file-name "Save to: "
-                               nil nil nil "form-cycle-patterns.el"))))
+                               nil nil nil
+                               (if form-cycle-pattern-file
+                                   form-cycle-pattern-file
+                                   "form-cycle-patterns.el")))))
     (with-temp-buffer
       (dolist (fc (reverse form-cycle-lisp-patterns))
         (newline)
